@@ -1,35 +1,45 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import React, { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
+import { Tab, Tabs, useMediaQuery, useTheme } from "@mui/material";
+import DrawerComp from "./drawerComp";
 
-
-export default function navBar() {
+const NavBar = () => {
+  const [value, setValue] = useState();
+  const theme = useTheme();
+  // const isMatch =useMediaQuery(theme.brakpoints.down('md' ));
+    console.log(theme);
   return (
-    <Box sx={{ flexGrow: 1 }}  >
-      <AppBar position="static" style={{background:"linear-gradient( #9acd32, #ffeb3b, #006400)"}}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar sx={{ background: "#063970" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          <StorefrontTwoToneIcon></StorefrontTwoToneIcon>
+          <Tabs
+            textColor="inherit"
+            value={value}
+            onChange={(event, value) => {
+              setValue(value);
+            }}
+            indicatorColor="secondary"
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+            <Tab label="Home" />
+            <Tab label="Contact" />
+            <Tab label="About" />
+          </Tabs>
+          <Button variant="contained" sx={{ marginLeft: "auto" }}>
+            Login{" "}
+          </Button>
+          <Button variant="contained" sx={{ marginLeft: "15px" }}>
+            Sign UP
+          </Button>
         </Toolbar>
+        <DrawerComp/>
       </AppBar>
     </Box>
   );
-}
+};
 
-
+export default NavBar;
